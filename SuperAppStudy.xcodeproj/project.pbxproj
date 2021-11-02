@@ -3,10 +3,15 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
+		069A839B2730016B00122542 /* ModernRIBs in Frameworks */ = {isa = PBXBuildFile; productRef = 069A839A2730016B00122542 /* ModernRIBs */; };
+		069A83A82730051B00122542 /* SuperPayDashboardRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 069A83A42730051B00122542 /* SuperPayDashboardRouter.swift */; };
+		069A83A92730051B00122542 /* SuperPayDashboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 069A83A52730051B00122542 /* SuperPayDashboardViewController.swift */; };
+		069A83AA2730051B00122542 /* SuperPayDashboardBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 069A83A62730051B00122542 /* SuperPayDashboardBuilder.swift */; };
+		069A83AB2730051B00122542 /* SuperPayDashboardInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 069A83A72730051B00122542 /* SuperPayDashboardInteractor.swift */; };
 		1CCF07C3272FA52D00988365 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CCF07C2272FA52D00988365 /* AppDelegate.swift */; };
 		1CCF07C7272FA52D00988365 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CCF07C6272FA52D00988365 /* ViewController.swift */; };
 		1CCF07CA272FA52D00988365 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1CCF07C8272FA52D00988365 /* Main.storyboard */; };
@@ -35,6 +40,12 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		069A8398272FF3D200122542 /* Map.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = Map.playground; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
+		069A83A2273001F500122542 /* Study.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = Study.playground; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
+		069A83A42730051B00122542 /* SuperPayDashboardRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuperPayDashboardRouter.swift; sourceTree = "<group>"; };
+		069A83A52730051B00122542 /* SuperPayDashboardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuperPayDashboardViewController.swift; sourceTree = "<group>"; };
+		069A83A62730051B00122542 /* SuperPayDashboardBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuperPayDashboardBuilder.swift; sourceTree = "<group>"; };
+		069A83A72730051B00122542 /* SuperPayDashboardInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuperPayDashboardInteractor.swift; sourceTree = "<group>"; };
 		1CCF07BF272FA52D00988365 /* SuperAppStudy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SuperAppStudy.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1CCF07C2272FA52D00988365 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		1CCF07C6272FA52D00988365 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -56,6 +67,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				069A839B2730016B00122542 /* ModernRIBs in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -76,6 +88,70 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		069A8397272FF3C000122542 /* playground */ = {
+			isa = PBXGroup;
+			children = (
+				069A8398272FF3D200122542 /* Map.playground */,
+				069A83A2273001F500122542 /* Study.playground */,
+			);
+			path = playground;
+			sourceTree = "<group>";
+		};
+		069A839C2730019200122542 /* AppDelegate */ = {
+			isa = PBXGroup;
+			children = (
+				1CCF07C2272FA52D00988365 /* AppDelegate.swift */,
+			);
+			path = AppDelegate;
+			sourceTree = "<group>";
+		};
+		069A839D2730019B00122542 /* AppRoot */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = AppRoot;
+			sourceTree = "<group>";
+		};
+		069A839E273001B000122542 /* AppHome */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = AppHome;
+			sourceTree = "<group>";
+		};
+		069A839F273001B800122542 /* TransportHome */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = TransportHome;
+			sourceTree = "<group>";
+		};
+		069A83A0273001C300122542 /* FinanceHome */ = {
+			isa = PBXGroup;
+			children = (
+				069A83A3273004EA00122542 /* SuperPPayDashboard */,
+			);
+			path = FinanceHome;
+			sourceTree = "<group>";
+		};
+		069A83A1273001CD00122542 /* ProfileHome */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ProfileHome;
+			sourceTree = "<group>";
+		};
+		069A83A3273004EA00122542 /* SuperPPayDashboard */ = {
+			isa = PBXGroup;
+			children = (
+				069A83A42730051B00122542 /* SuperPayDashboardRouter.swift */,
+				069A83A52730051B00122542 /* SuperPayDashboardViewController.swift */,
+				069A83A62730051B00122542 /* SuperPayDashboardBuilder.swift */,
+				069A83A72730051B00122542 /* SuperPayDashboardInteractor.swift */,
+			);
+			path = SuperPPayDashboard;
+			sourceTree = "<group>";
+		};
 		1CCF07B6272FA52D00988365 = {
 			isa = PBXGroup;
 			children = (
@@ -99,13 +175,19 @@
 		1CCF07C1272FA52D00988365 /* SuperAppStudy */ = {
 			isa = PBXGroup;
 			children = (
-				1CCF07C2272FA52D00988365 /* AppDelegate.swift */,
+				069A83A1273001CD00122542 /* ProfileHome */,
+				069A83A0273001C300122542 /* FinanceHome */,
+				069A839F273001B800122542 /* TransportHome */,
+				069A839E273001B000122542 /* AppHome */,
+				069A839D2730019B00122542 /* AppRoot */,
+				069A839C2730019200122542 /* AppDelegate */,
 				1CCF07C6272FA52D00988365 /* ViewController.swift */,
 				1CCF07C8272FA52D00988365 /* Main.storyboard */,
 				1CCF07CE272FA52F00988365 /* Assets.xcassets */,
 				1CCF07D0272FA52F00988365 /* LaunchScreen.storyboard */,
 				1CCF07D3272FA52F00988365 /* Info.plist */,
 				1CCF07CB272FA52D00988365 /* SuperAppStudy.xcdatamodeld */,
+				069A8397272FF3C000122542 /* playground */,
 			);
 			path = SuperAppStudy;
 			sourceTree = "<group>";
@@ -144,6 +226,9 @@
 			dependencies = (
 			);
 			name = SuperAppStudy;
+			packageProductDependencies = (
+				069A839A2730016B00122542 /* ModernRIBs */,
+			);
 			productName = SuperAppStudy;
 			productReference = 1CCF07BF272FA52D00988365 /* SuperAppStudy.app */;
 			productType = "com.apple.product-type.application";
@@ -215,6 +300,9 @@
 				Base,
 			);
 			mainGroup = 1CCF07B6272FA52D00988365;
+			packageReferences = (
+				069A83992730016B00122542 /* XCRemoteSwiftPackageReference "ModernRIBs" */,
+			);
 			productRefGroup = 1CCF07C0272FA52D00988365 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -259,7 +347,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				1CCF07C7272FA52D00988365 /* ViewController.swift in Sources */,
+				069A83AA2730051B00122542 /* SuperPayDashboardBuilder.swift in Sources */,
+				069A83A92730051B00122542 /* SuperPayDashboardViewController.swift in Sources */,
+				069A83AB2730051B00122542 /* SuperPayDashboardInteractor.swift in Sources */,
 				1CCF07C3272FA52D00988365 /* AppDelegate.swift in Sources */,
+				069A83A82730051B00122542 /* SuperPayDashboardRouter.swift in Sources */,
 				1CCF07CD272FA52D00988365 /* SuperAppStudy.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -595,6 +687,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		069A83992730016B00122542 /* XCRemoteSwiftPackageReference "ModernRIBs" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/DevYeom/ModernRIBs.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		069A839A2730016B00122542 /* ModernRIBs */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 069A83992730016B00122542 /* XCRemoteSwiftPackageReference "ModernRIBs" */;
+			productName = ModernRIBs;
+		};
+/* End XCSwiftPackageProductDependency section */
 
 /* Begin XCVersionGroup section */
 		1CCF07CB272FA52D00988365 /* SuperAppStudy.xcdatamodeld */ = {
