@@ -29,7 +29,7 @@ final class AppRootInteractor: PresentableInteractor<AppRootPresentable>, AppRoo
   override func didBecomeActive() {
     super.didBecomeActive()
     
-    router?.attachTabs()
+    router?.attachTabs() //viewdidload와 비슷한 역할, 부모에게 attach되서 활성화될 때 호출
   }
   
   override func willResignActive() {

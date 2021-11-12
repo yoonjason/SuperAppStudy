@@ -1,6 +1,7 @@
 import ModernRIBs
 
 protocol FinanceHomeRouting: ViewableRouting {
+    func attachSuperPayDashboard()
   // TODO: Declare methods the interactor can invoke to manage sub-tree via the router.
 }
 
@@ -27,6 +28,8 @@ final class FinanceHomeInteractor: PresentableInteractor<FinanceHomePresentable>
   
   override func didBecomeActive() {
     super.didBecomeActive()
+      router?.attachSuperPayDashboard()
+//      router.attach
     // TODO: Implement business logic here.
   }
   

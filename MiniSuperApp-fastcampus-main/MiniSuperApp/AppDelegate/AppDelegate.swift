@@ -15,7 +15,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     self.window = window
     
     let result = AppRootBuilder(dependency: AppComponent()).build()
-    self.launchRouter = result.launchRouter
+    self.launchRouter = result.launchRouter //앱의 맨처음 리블렛을 사용한다.
     self.urlHandler = result.urlHandler
     launchRouter?.launch(from: window)
     
