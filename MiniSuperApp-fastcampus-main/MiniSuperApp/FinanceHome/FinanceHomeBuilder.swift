@@ -5,9 +5,22 @@ protocol FinanceHomeDependency: Dependency {
     // created by this RIB.
 }
 
-final class FinanceHomeComponent: Component<FinanceHomeDependency>, SuperPayDashboardDependency {
+final class FinanceHomeComponent: Component<FinanceHomeDependency>, SuperPayDashboardDependency, CardOnFileDashboardDependency {
+    
+    var cardOnFileRepository: CardOnFileRepository
+    var balance: ReadOnlyCurrentValuePublisher<Double> { balancePublisher }
 
-    // TODO: Declare 'fileprivate' dependencies that are only used by this RIB.
+    private let balancePublisher: ReadOnlyCurrentValuePublisher<Double>
+
+    init(
+        dependency: FinanceHomeDependency,
+        balance: CurrentValuePublisher<Double>,
+        cardOnFileRepository: CardOnFileRepository
+    ) {
+        self.balancePublisher = balance
+        self.cardOnFileRepository = cardOnFileRepository
+        super.init(dependency: dependency)
+    }
 }
 
 // MARK: - Builder
@@ -23,18 +36,25 @@ final class FinanceHomeBuilder: Builder<FinanceHomeDependency>, FinanceHomeBuild
     }
 
     func build(withListener listener: FinanceHomeListener) -> FinanceHomeRouting {
-        let component = FinanceHomeComponent(dependency: dependency)
+        let balancePublisher = CurrentValuePublisher<Double>(20000)
+
+        let component = FinanceHomeComponent(
+            dependency: dependency,
+            balance: balancePublisher,
+            cardOnFileRepository: CardOnFileRepositoryImp()
+        )
         let viewController = FinanceHomeViewController()
         let interactor = FinanceHomeInteractor(presenter: viewController)
         interactor.listener = listener
 
         let superPayDashboradBuilder = SuperPayDashboardBuilder(dependency: component)
-
+        let cardFileOnDashboardBuilder = CardOnFileDashboardBuilder(dependency: component)
 
         return FinanceHomeRouter(
             interactor: interactor,
             viewController: viewController,
-            superPayDashboardBuildable: superPayDashboradBuilder
+            superPayDashboardBuildable: superPayDashboradBuilder,
+            cardOnFileDashboardBuildable: cardFileOnDashboardBuilder
         )
     }
 }
