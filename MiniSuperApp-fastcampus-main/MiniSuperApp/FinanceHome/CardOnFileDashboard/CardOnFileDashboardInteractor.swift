@@ -18,7 +18,7 @@ protocol CardOnFileDashboardPresentable: Presentable {
 }
 
 protocol CardOnFileDashboardListener: AnyObject {
-    // 부모에게 어떤 이벤트가 발생했는지를 알릴 숭 ㅣㅆ다.
+    // 부모에게 어떤 이벤트가 발생했는지를 알릴 수 있다.
     func cardOnFileDashboardDidTapAddPaymentMethod()
     // TODO: Declare methods the interactor can invoke to communicate with other RIBs.
 }
@@ -33,13 +33,13 @@ final class CardOnFileDashboardInteractor: PresentableInteractor<CardOnFileDashb
     weak var listener: CardOnFileDashboardListener?
     
     private let dependency: CardOnFileDashboardInteractorDependency
-    private var cancellabels: Set<AnyCancellable>
+    private var cancellables: Set<AnyCancellable>
 
     // TODO: Add additional dependencies to constructor. Do not perform any logic
     // in constructor.
     init(presenter: CardOnFileDashboardPresentable, dependency: CardOnFileDashboardInteractorDependency) {
         self.dependency = dependency
-        self.cancellabels = .init()
+        self.cancellables = .init()
         super.init(presenter: presenter)
         presenter.listener = self
     }
@@ -49,13 +49,13 @@ final class CardOnFileDashboardInteractor: PresentableInteractor<CardOnFileDashb
         dependency.cardOnFileRepository.cardOnFile.sink {  methods in
             let viewModels = methods.prefix(5).map(PaymentMethodViewModel.init)
             self.presenter.update(with: viewModels)
-        }.store(in: &cancellabels)
+        }.store(in: &cancellables)
     }
 
     override func willResignActive() {
         super.willResignActive()
-        cancellabels.forEach { $0.cancel() }
-        cancellabels.removeAll()
+        cancellables.forEach { $0.cancel() }
+        cancellables.removeAll()
     }
     
     func didTapAddPaymentMethod() {

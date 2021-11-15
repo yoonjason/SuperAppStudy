@@ -18,6 +18,8 @@ final class CardOnFileRepositoryImp: CardOnFileRepository {
 
     private let paymentMethodsSubject = CurrentValuePublisher<[PaymentMethod]>([
         PaymentMethod(id: "0", name: "신한은행", digits: "0123", color: "#f19a38ff", isPrimary: false),
+        PaymentMethod(id: "4", name: "카카오카드", digits: "0123", color: "#ffcc00ff", isPrimary: false),
+        PaymentMethod(id: "0", name: "신한은행", digits: "0123", color: "#f19a38ff", isPrimary: false),
         PaymentMethod(id: "4", name: "카카오카드", digits: "0123", color: "#ffcc00ff", isPrimary: false)
         ])
     //카드 쪽 데이터와. APi 연동
