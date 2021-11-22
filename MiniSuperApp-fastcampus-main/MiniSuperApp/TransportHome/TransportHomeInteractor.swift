@@ -3,42 +3,84 @@ import Combine
 import Foundation
 
 protocol TransportHomeRouting: ViewableRouting {
+    func attachTopup()
+    func detachTopup()
 }
 
 protocol TransportHomePresentable: Presentable {
-  var listener: TransportHomePresentableListener? { get set }
-  
+    var listener: TransportHomePresentableListener? { get set }
+    func setSuperPayBalance(_ blance: String)
+
 }
 
 protocol TransportHomeListener: AnyObject {
-  func transportHomeDidTapClose()
+    func transportHomeDidTapClose()
 }
 
 protocol TransportHomeInteractorDependency {
+    var superPayBlance: ReadOnlyCurrentValuePublisher<Double> { get }
 }
 
 final class TransportHomeInteractor: PresentableInteractor<TransportHomePresentable>, TransportHomeInteractable, TransportHomePresentableListener {
-  
-  weak var router: TransportHomeRouting?
-  weak var listener: TransportHomeListener?
-  
-  
-  override init(presenter: TransportHomePresentable) {
-    super.init(presenter: presenter)
-    presenter.listener = self
-  }
-  
-  override func didBecomeActive() {
-    super.didBecomeActive()
+
+
+    weak var router: TransportHomeRouting?
+    weak var listener: TransportHomeListener?
     
-  }
-  
-  override func willResignActive() {
-    super.willResignActive()
-    // TODO: Pause any business logic.
-  }
-  
-  func didTapBack() {
-    listener?.transportHomeDidTapClose()
-  }
+    private let ridePrice: Double = 18000
+
+    private let dependency: TransportHomeInteractorDependency
+
+    private var cancellables: Set<AnyCancellable>
+    
+
+    init(
+        presenter: TransportHomePresentable,
+        dependency: TransportHomeInteractorDependency
+    ) {
+        self.dependency = dependency
+        self.cancellables = .init()
+        super.init(presenter: presenter)
+        presenter.listener = self
+    }
+
+    override func didBecomeActive() {
+        super.didBecomeActive()
+        dependency.superPayBlance
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] balance in
+            if let balanceText = Formatter.blanceFormatter.string(from: NSNumber(value: balance)) {
+                self?.presenter.setSuperPayBalance(balanceText)
+            }
+
+        }
+            .store(in: &cancellables)
+    }
+
+    override func willResignActive() {
+        super.willResignActive()
+        // TODO: Pause any business logic.
+    }
+
+    func didTapBack() {
+        listener?.transportHomeDidTapClose()
+    }
+    
+    func didTapRideConfirmButton() {
+        if dependency.superPayBlance.value < ridePrice {
+            //어태치 팝업
+            router?.attachTopup()
+        }else {
+            //success
+        }
+    }
+    
+    func topupDidClose() {
+        router?.detachTopup()
+    }
+    
+    func topupDidFinish() {
+        router?.detachTopup()
+    }
+    
 }

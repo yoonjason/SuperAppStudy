@@ -1,26 +1,25 @@
 import ModernRIBs
 
+/**
+ 부모로부터 받는다.
+ */
 protocol FinanceHomeDependency: Dependency {
-    // TODO: Declare the set of dependencies required by this RIB, but cannot be
-    // created by this RIB.
+    var cardOnFileRepository: CardOnFileRepository { get }
+    var superPayRepository: SuperPayRepository { get }
 }
 
 final class FinanceHomeComponent: Component<FinanceHomeDependency>, SuperPayDashboardDependency, CardOnFileDashboardDependency, AddPaymentMethodDependency, TopupDependency {
-    
-    var cardOnFileRepository: CardOnFileRepository
-    var superPayRepository: SuperPayRepository
+
+    var cardOnFileRepository: CardOnFileRepository { dependency.cardOnFileRepository }
+    var superPayRepository: SuperPayRepository { dependency.superPayRepository }
     var balance: ReadOnlyCurrentValuePublisher<Double> { superPayRepository.balance }
     var topupBaseViewController: ViewControllable
     //파이낸스홈 리블렛이 가지고 있는 파이낸스홈 뷰컨트롤러가 되면 된다.
 
     init(
         dependency: FinanceHomeDependency,
-        cardOnFileRepository: CardOnFileRepository,
-        superPayRepository: SuperPayRepository,
         topupBaseViewController: ViewControllable
     ) {
-        self.cardOnFileRepository = cardOnFileRepository
-        self.superPayRepository = superPayRepository
         self.topupBaseViewController = topupBaseViewController
         super.init(dependency: dependency)
     }
@@ -39,16 +38,14 @@ final class FinanceHomeBuilder: Builder<FinanceHomeDependency>, FinanceHomeBuild
     }
 
     func build(withListener listener: FinanceHomeListener) -> FinanceHomeRouting {
-        
+
         let viewController = FinanceHomeViewController()
 
         let component = FinanceHomeComponent(
             dependency: dependency,
-            cardOnFileRepository: CardOnFileRepositoryImp(),
-            superPayRepository: SuperPayRepositoryImp(),
             topupBaseViewController: viewController
         )
-        
+
         let interactor = FinanceHomeInteractor(presenter: viewController)
         interactor.listener = listener
 
@@ -56,7 +53,7 @@ final class FinanceHomeBuilder: Builder<FinanceHomeDependency>, FinanceHomeBuild
         let cardFileOnDashboardBuilder = CardOnFileDashboardBuilder(dependency: component)
         let addPaymentMethodBuilder = AddPaymentMethodBuilder(dependency: component)
         let topupBuilder = TopupBuilder(dependency: component)
-        
+
         return FinanceHomeRouter(
             interactor: interactor,
             viewController: viewController,

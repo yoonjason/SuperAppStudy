@@ -56,7 +56,6 @@ final class EnterAmountInteractor: PresentableInteractor<EnterAmountPresentable>
             self?.presenter.updateSelectedPaymentMethod(with: SelectedPaymentMethodViewModel(paymentMethod))
         }
             .store(in: &cancellables)
-        print("3232323")
         // TODO: Implement business logic here.
     }
 
@@ -87,7 +86,7 @@ final class EnterAmountInteractor: PresentableInteractor<EnterAmountPresentable>
         } receiveValue: { [weak self] in
             self?.listener?.enterAmountDidFinishTopup()
         }
-        .store(in: &cancellables)
+            .store(in: &cancellables)
         presenter.stopLoading()
     }
 }
