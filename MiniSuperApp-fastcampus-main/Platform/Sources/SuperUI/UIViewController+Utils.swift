@@ -6,22 +6,9 @@
 //
 
 import UIKit
+import RIBsUtil
 
-enum DismissButtonType {
-    case back, close
-    
-    var iconSystemName: String {
-        switch self {
-        case .back:
-            return "chevron.backward"
-        case .close:
-            return "xmark"
-        }
-    }
-    
-}
-
-extension UIViewController {
+public extension UIViewController {
 
 //    navi
     func setupNavigationItem(with buttonType:DismissButtonType, target: Any?, action: Selector?) {

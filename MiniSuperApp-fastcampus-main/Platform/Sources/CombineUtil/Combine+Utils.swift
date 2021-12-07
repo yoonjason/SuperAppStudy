@@ -34,7 +34,7 @@ public final class CurrentValuePublisher<Element>: ReadOnlyCurrentValuePublisher
     typealias Output = Element
     typealias Failure = Never
 
-    override init(_ initValue: Element) {
+    public override init(_ initValue: Element) {
         super.init(initValue)
     }
 

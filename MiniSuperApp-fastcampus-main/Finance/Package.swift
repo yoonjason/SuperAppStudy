@@ -15,11 +15,13 @@ let package = Package(
         .library(name: "FinanceEntity",
                  targets: ["FinanceEntity"]
                 ),
+        .library(name: "FinanceRepository",
+                 targets: ["FinanceRepository"]
+                ),
     ],
     dependencies: [
-        // Dependencies declare other packages that this package depends on.
-        //
         .package(name: "ModernRIBs", url: "https://github.com/DevYeom/ModernRIBs", .exact("1.0.1")),
+        .package(path:"../Platform")
     ],
     targets: [
         // Targets are the basic building blocks of a package. A target can define a module or a test suite.
@@ -28,11 +30,23 @@ let package = Package(
             name: "AddPaymentMethod",
             dependencies: [
                 "ModernRIBs",
-                "FinanceEntity"
+                "FinanceEntity",
+                "FinanceRepository",
+                .product(name:"RIBsUtil", package: "Platform"),
+                .product(name:"SuperUI", package: "Platform")
             ]
          ),
-        .target(name: "FinanceEntity",
+        .target(
+            name: "FinanceEntity",
                 dependencies: []
+               ),
+        .target(
+            name: "FinanceRepository",
+                dependencies: [
+                    "FinanceEntity",
+                    .product(name: "CombineUtil", package: "Platform")
+                ]
                )
+        
     ]
 )

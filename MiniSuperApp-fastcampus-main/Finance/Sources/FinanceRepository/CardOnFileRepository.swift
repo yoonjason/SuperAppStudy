@@ -7,14 +7,16 @@
 
 import Foundation
 import Combine
+import FinanceEntity
+import CombineUtil
 
-protocol CardOnFileRepository {
+public protocol CardOnFileRepository {
     var cardOnFile: ReadOnlyCurrentValuePublisher<[PaymentMethod]> { get }
     func addCard(info: AddPaymentMethodInfo) -> AnyPublisher<PaymentMethod, Error>
 }
 
-final class CardOnFileRepositoryImp: CardOnFileRepository {
-    var cardOnFile: ReadOnlyCurrentValuePublisher<[PaymentMethod]> { paymentMethodsSubject }
+public final class CardOnFileRepositoryImp: CardOnFileRepository {
+    public var cardOnFile: ReadOnlyCurrentValuePublisher<[PaymentMethod]> { paymentMethodsSubject }
 
     private let paymentMethodsSubject = CurrentValuePublisher<[PaymentMethod]>([
         PaymentMethod(id: "4", name: "카카오카드", digits: "0123", color: "#ffcc00ff", isPrimary: false),
@@ -24,7 +26,7 @@ final class CardOnFileRepositoryImp: CardOnFileRepository {
         ])
     //카드 쪽 데이터와. APi 연동
     
-    func addCard(info: AddPaymentMethodInfo) -> AnyPublisher<PaymentMethod, Error> {
+    public func addCard(info: AddPaymentMethodInfo) -> AnyPublisher<PaymentMethod, Error> {
         let paymentMethod = PaymentMethod(id: "0", name: "Kakao", digits: "\(info.number.suffix(4))", color: "", isPrimary: false)
         var new = paymentMethodsSubject.value
         new.append(paymentMethod)
@@ -32,5 +34,8 @@ final class CardOnFileRepositoryImp: CardOnFileRepository {
         return Just(paymentMethod).setFailureType(to: Error.self).eraseToAnyPublisher()
     }
     
+    public init() {
+        
+    }
 
 }
