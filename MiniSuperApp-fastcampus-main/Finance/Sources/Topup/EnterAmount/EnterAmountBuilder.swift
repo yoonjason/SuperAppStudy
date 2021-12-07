@@ -8,6 +8,7 @@
 import ModernRIBs
 import CombineUtil
 import FinanceEntity
+import FinanceRepository
 
 protocol EnterAmountDependency: Dependency {
     //부모로부터 받는다

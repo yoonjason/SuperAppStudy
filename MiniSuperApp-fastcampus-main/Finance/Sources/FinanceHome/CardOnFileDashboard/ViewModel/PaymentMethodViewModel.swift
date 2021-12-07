@@ -8,6 +8,7 @@
 import UIKit
 import FinanceEntity
 
+//인터렉터와
 struct PaymentMethodViewModel {
     let name: String
     let digits: String

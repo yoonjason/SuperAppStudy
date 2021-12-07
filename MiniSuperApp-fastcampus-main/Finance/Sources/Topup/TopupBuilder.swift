@@ -18,7 +18,7 @@ import SuperUI
  뷰 컨틀로러는 라우터한테 넘겨줘서 라우터에서 이 뷰 컨트롤러를 접근할 수 있다.
  이 뷰컨은 탑업 리블렛이 소유한게 아니고 띄운 부모리블렛이 소요할 수 있다.
  */
-protocol TopupDependency: Dependency {
+public protocol TopupDependency: Dependency  {
     var topupBaseViewController: ViewControllable { get }
     var cardOnFileRepository: CardOnFileRepository { get }
     var superPayRepository: SuperPayRepository { get }
@@ -49,17 +49,17 @@ final class TopupComponent: Component<TopupDependency>, TopupInteractorDependenc
 
 // MARK: - Builder
 
-protocol TopupBuildable: Buildable {
-    func build(withListener listener: TopupListener) -> TopupRouting
+public protocol TopupBuildable: Buildable {
+    func build(withListener listener: TopupListener) -> Routing
 }
 
-final class TopupBuilder: Builder<TopupDependency>, TopupBuildable {
+public final class TopupBuilder: Builder<TopupDependency>, TopupBuildable {
 
-    override init(dependency: TopupDependency) {
+    public override init(dependency: TopupDependency) {
         super.init(dependency: dependency)
     }
 
-    func build(withListener listener: TopupListener) -> TopupRouting {
+    public func build(withListener listener: TopupListener) -> Routing {
         let paymentMethodStream = CurrentValuePublisher(PaymentMethod(id: "", name: "", digits: "", color: "", isPrimary: false))
         
         let component = TopupComponent(dependency: dependency, paymentMethodStream: paymentMethodStream)

@@ -1,4 +1,5 @@
 import ModernRIBs
+import Topup
 
 protocol TransportHomeInteractable: Interactable, TopupListener {
     var router: TransportHomeRouting? { get set }
@@ -12,7 +13,7 @@ protocol TransportHomeViewControllable: ViewControllable {
 final class TransportHomeRouter: ViewableRouter<TransportHomeInteractable, TransportHomeViewControllable>, TransportHomeRouting {
 
     private let topupBuildable: TopupBuildable
-    private var topupRouting: TopupRouting?
+    private var topupRouting: Routing?
 
     init(
         interactor: TransportHomeInteractable,
