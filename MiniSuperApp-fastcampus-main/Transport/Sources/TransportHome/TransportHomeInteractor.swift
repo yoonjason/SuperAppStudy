@@ -2,6 +2,7 @@ import ModernRIBs
 import Combine
 import Foundation
 import CombineUtil
+import FinanceHome
 
 protocol TransportHomeRouting: ViewableRouting {
     func attachTopup()
@@ -14,7 +15,7 @@ protocol TransportHomePresentable: Presentable {
 
 }
 
-protocol TransportHomeListener: AnyObject {
+public protocol TransportHomeListener: AnyObject {
     func transportHomeDidTapClose()
 }
 

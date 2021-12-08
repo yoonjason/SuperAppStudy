@@ -10,7 +10,7 @@ protocol AppRootPresentable: Presentable {
   // TODO: Declare methods the interactor can invoke the presenter to present data.
 }
 
-protocol AppRootListener: AnyObject {
+public protocol AppRootListener: AnyObject {
   // TODO: Declare methods the interactor can invoke to communicate with other RIBs.
 }
 
