@@ -3,6 +3,7 @@ import Combine
 import Foundation
 import CombineUtil
 import FinanceHome
+import TransportHome
 
 protocol TransportHomeRouting: ViewableRouting {
     func attachTopup()
@@ -15,9 +16,7 @@ protocol TransportHomePresentable: Presentable {
 
 }
 
-public protocol TransportHomeListener: AnyObject {
-    func transportHomeDidTapClose()
-}
+
 
 protocol TransportHomeInteractorDependency {
     var superPayBlance: ReadOnlyCurrentValuePublisher<Double> { get }

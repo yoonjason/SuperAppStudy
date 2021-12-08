@@ -12,22 +12,32 @@ let package = Package(
             name: "TransportHome",
             targets: ["TransportHome"]
         ),
-        
+        .library(
+            name: "TransportHomeImp",
+            targets: ["TransportHomeImp"]
+        ),
     ],
     dependencies: [
         .package(name: "ModernRIBs", url: "https://github.com/DevYeom/ModernRIBs", .exact("1.0.1")),
-        .package(path:"../Finance")
+        .package(path:"../Finance"),
+        .package(path:"../Platform")
     ],
     targets: [
-        // Targets are the basic building blocks of a package. A target can define a module or a test suite.
-        // Targets can depend on other targets in this package, and on products in packages this package depends on.
         .target(
             name: "TransportHome",
             dependencies: [
                 "ModernRIBs",
+            ]
+        ),
+        .target(
+            name: "TransportHomeImp",
+            dependencies: [
+                "ModernRIBs",
+                "TransportHome",
                 .product(name: "FinanceRepository", package: "Finance"),
                 .product(name: "Topup", package: "Finance"),
-                .product(name: "FinanceHome", package: "Finance")
+                .product(name: "FinanceHome", package: "Finance"),
+                .product(name: "SuperUI", package: "Platform")
             ],
             resources: [
                 .process("Resoureces"),

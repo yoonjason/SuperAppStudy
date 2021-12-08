@@ -2,15 +2,17 @@ import ModernRIBs
 import FinanceRepository
 import TransportHome
 
-
+//부모한테서 요청을 한다.
 public protocol AppHomeDependency: Dependency {
     var cardOnFileRepository: CardOnFileRepository { get }
     var superPayRepository: SuperPayRepository { get }
+    var transportHomeBuildable: TransportHomeBuildable { get }
 }
 
-final class AppHomeComponent: Component<AppHomeDependency>, TransportHomeDependency {
+final class AppHomeComponent: Component<AppHomeDependency> {
     var cardOnFileRepository: CardOnFileRepository { dependency.cardOnFileRepository }
     var superPayRepository: SuperPayRepository { dependency.superPayRepository }
+    var transportHomeBuildable: TransportHomeBuildable { dependency.transportHomeBuildable }
 }
 
 // MARK: - Builder
@@ -31,12 +33,10 @@ public final class AppHomeBuilder: Builder<AppHomeDependency>, AppHomeBuildable 
         let interactor = AppHomeInteractor(presenter: viewController)
         interactor.listener = listener
 
-        let transportHomeBuilder = TransportHomeBuilder(dependency: component)
-
         return AppHomeRouter(
             interactor: interactor,
             viewController: viewController,
-            transportHomeBuildable: transportHomeBuilder
+            transportHomeBuildable: component.transportHomeBuildable
         )
     }
 }

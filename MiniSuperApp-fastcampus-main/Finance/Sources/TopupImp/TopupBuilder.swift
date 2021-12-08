@@ -11,6 +11,7 @@ import CombineUtil
 import FinanceEntity
 import AddPaymentMethod
 import SuperUI
+import Topup
 
 /**
  Topup리블렛이 동작하기 위해 필요한 것들을 선언해두는 곳이다.
@@ -48,11 +49,6 @@ final class TopupComponent: Component<TopupDependency>, TopupInteractorDependenc
 }
 
 // MARK: - Builder
-
-public protocol TopupBuildable: Buildable {
-    func build(withListener listener: TopupListener) -> Routing
-}
-
 public final class TopupBuilder: Builder<TopupDependency>, TopupBuildable {
 
     public override init(dependency: TopupDependency) {
