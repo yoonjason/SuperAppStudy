@@ -79,5 +79,14 @@ public extension ViewControllable {
       self.uiviewController.navigationController?.setViewControllers(viewControllerables.map(\.uiviewController), animated: true)
     }
   }
+    
+    //재귀적으로 계속해서 presentedViewController가 있을 때까지 올라가서 가장 위에 있는 뷰컨트롤러를 리턴해준다.
+    var topViewControllerable: ViewControllable {
+        var top: ViewControllable = self
+        while let presented = top.uiviewController.presentedViewController as? ViewControllable {
+            top = presented
+        }
+        return top
+    }
 }
 

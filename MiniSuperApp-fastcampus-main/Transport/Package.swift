@@ -36,7 +36,6 @@ let package = Package(
                 "TransportHome",
                 .product(name: "FinanceRepository", package: "Finance"),
                 .product(name: "Topup", package: "Finance"),
-                .product(name: "FinanceHome", package: "Finance"),
                 .product(name: "SuperUI", package: "Platform")
             ],
             resources: [

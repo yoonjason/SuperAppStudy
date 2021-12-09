@@ -12,21 +12,30 @@ let package = Package(
             name: "AddPaymentMethod",
             targets: ["AddPaymentMethod"]
         ),
-        .library(name: "TopupImp",
-                 targets: ["Topup"]
-                ),
-        .library(name: "Topup",
-                 targets: ["Topup"]
-                ),
-        .library(name: "FinanceHome",
-                 targets: ["FinanceHome"]
-                ),
-        .library(name: "FinanceEntity",
-                 targets: ["FinanceEntity"]
-                ),
-        .library(name: "FinanceRepository",
-                 targets: ["FinanceRepository"]
-                ),
+        .library(
+            name: "AddPaymentMethodImp",
+            targets: ["AddPaymentMethodImp"]
+        ),
+        .library(
+            name: "Topup",
+            targets: ["Topup"]
+        ),
+        .library(
+            name: "TopupImp",
+            targets: ["TopupImp"]
+        ),
+        .library(
+            name: "FinanceHome",
+            targets: ["FinanceHome"]
+        ),
+        .library(
+            name: "FinanceEntity",
+            targets: ["FinanceEntity"]
+        ),
+        .library(
+            name: "FinanceRepository",
+            targets: ["FinanceRepository"]
+        ),
     ],
     dependencies: [
         .package(name: "ModernRIBs", url: "https://github.com/DevYeom/ModernRIBs", .exact("1.0.1")),
@@ -40,17 +49,26 @@ let package = Package(
             dependencies: [
                 "ModernRIBs",
                 "FinanceEntity",
+                .product(name:"RIBsUtil", package: "Platform"),
+            ]
+        ),
+        .target(
+            name: "AddPaymentMethodImp",
+            dependencies: [
+                "ModernRIBs",
+                "AddPaymentMethod",
+                "FinanceEntity",
                 "FinanceRepository",
                 .product(name:"RIBsUtil", package: "Platform"),
                 .product(name:"SuperUI", package: "Platform")
             ]
-         ),
+        ),
         .target(
             name: "Topup",
             dependencies: [
                 "ModernRIBs",
             ]
-         ),
+        ),
         .target(
             name: "TopupImp",
             dependencies: [
@@ -62,30 +80,30 @@ let package = Package(
                 .product(name:"RIBsUtil", package: "Platform"),
                 .product(name:"SuperUI", package: "Platform")
             ]
-         ),
+        ),
         .target(
             name: "FinanceHome",
             dependencies: [
                 "ModernRIBs",
+                "Topup",
                 "FinanceEntity",
                 "FinanceRepository",
                 "AddPaymentMethod",
-                "Topup",
                 .product(name:"RIBsUtil", package: "Platform"),
                 .product(name:"SuperUI", package: "Platform")
             ]
-         ),
+        ),
         .target(
             name: "FinanceEntity",
-                dependencies: []
-               ),
+            dependencies: []
+        ),
         .target(
             name: "FinanceRepository",
-                dependencies: [
-                    "FinanceEntity",
-                    .product(name: "CombineUtil", package: "Platform")
-                ]
-               )
+            dependencies: [
+                "FinanceEntity",
+                .product(name: "CombineUtil", package: "Platform")
+            ]
+        )
         
     ]
 )

@@ -11,24 +11,16 @@ public protocol FinanceHomeDependency: Dependency {
     var cardOnFileRepository: CardOnFileRepository { get }
     var superPayRepository: SuperPayRepository { get }
     var topupBuildable: TopupBuildable { get }
+    var addPaymentMethodBuildable: AddPaymentMethodBuildable { get }
 }
 
-final class FinanceHomeComponent: Component<FinanceHomeDependency>, SuperPayDashboardDependency, CardOnFileDashboardDependency, AddPaymentMethodDependency {
+final class FinanceHomeComponent: Component<FinanceHomeDependency>, SuperPayDashboardDependency, CardOnFileDashboardDependency {
 
     var cardOnFileRepository: CardOnFileRepository { dependency.cardOnFileRepository }
     var superPayRepository: SuperPayRepository { dependency.superPayRepository }
     var balance: ReadOnlyCurrentValuePublisher<Double> { superPayRepository.balance }
     var topupBuildable : TopupBuildable { dependency.topupBuildable }
-    var topupBaseViewController: ViewControllable
-    //파이낸스홈 리블렛이 가지고 있는 파이낸스홈 뷰컨트롤러가 되면 된다.
-
-    init(
-        dependency: FinanceHomeDependency,
-        topupBaseViewController: ViewControllable
-    ) {
-        self.topupBaseViewController = topupBaseViewController
-        super.init(dependency: dependency)
-    }
+    var addPaymentMethodBuildable: AddPaymentMethodBuildable { dependency.addPaymentMethodBuildable }
 }
 
 // MARK: - Builder
@@ -48,8 +40,7 @@ public final class FinanceHomeBuilder: Builder<FinanceHomeDependency>, FinanceHo
         let viewController = FinanceHomeViewController()
 
         let component = FinanceHomeComponent(
-            dependency: dependency,
-            topupBaseViewController: viewController
+            dependency: dependency
         )
 
         let interactor = FinanceHomeInteractor(presenter: viewController)
@@ -57,7 +48,6 @@ public final class FinanceHomeBuilder: Builder<FinanceHomeDependency>, FinanceHo
 
         let superPayDashboradBuilder = SuperPayDashboardBuilder(dependency: component)
         let cardFileOnDashboardBuilder = CardOnFileDashboardBuilder(dependency: component)
-        let addPaymentMethodBuilder = AddPaymentMethodBuilder(dependency: component)
 //        let topupBuilder = TopupBuilder(dependency: component)
 
         return FinanceHomeRouter(
@@ -65,7 +55,7 @@ public final class FinanceHomeBuilder: Builder<FinanceHomeDependency>, FinanceHo
             viewController: viewController,
             superPayDashboardBuildable: superPayDashboradBuilder,
             cardOnFileDashboardBuildable: cardFileOnDashboardBuilder,
-            addPaymentMethodBuildable: addPaymentMethodBuilder,
+            addPaymentMethodBuildable: component.addPaymentMethodBuildable,
             topupBuildable: component.topupBuildable
         )
     }

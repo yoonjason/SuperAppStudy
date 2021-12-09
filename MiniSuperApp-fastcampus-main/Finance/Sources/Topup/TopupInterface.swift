@@ -8,7 +8,6 @@
 import Foundation
 import ModernRIBs
 
-
 public protocol TopupBuildable: Buildable {
     func build(withListener listener: TopupListener) -> Routing
 }
