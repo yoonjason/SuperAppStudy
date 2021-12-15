@@ -13,6 +13,7 @@ import FinanceEntity
 import CombineUtil
 import SuperUI
 import Topup
+//import DefaultStore
 
 protocol TopupRouting: Routing {
     func cleanupViews()
@@ -31,6 +32,7 @@ protocol TopupRouting: Routing {
 protocol TopupInteractorDependency {
     var cardOnFileRepository: CardOnFileRepository { get }
     var paymentMethodStream: CurrentValuePublisher<PaymentMethod> { get }
+//    var defaultStore: DefaultsStore { get }
 }
 
 final class TopupInteractor: Interactor, TopupInteractable, AdaptivePresentationControllerDelegate, AddPaymentMethodListener {

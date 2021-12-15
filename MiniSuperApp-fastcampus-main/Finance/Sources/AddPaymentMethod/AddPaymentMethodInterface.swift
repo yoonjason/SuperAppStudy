@@ -20,3 +20,4 @@ public protocol AddPaymentMethodListener: AnyObject {
     func addPaymentMethodDidTapClose()
     func addPaymentMethodDidAddCard(paymentMethod: PaymentMethod)
 }
+

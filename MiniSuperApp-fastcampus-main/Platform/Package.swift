@@ -18,8 +18,8 @@ let package = Package(
             name: "SuperUI",
             targets: ["SuperUI"]),
         .library(
-            name: "DefaultStore",
-            targets: ["DefaultStore"]),
+            name: "DefaultsStore",
+            targets: ["DefaultsStore"]),
         .library(
             name: "Network",
             targets: ["Network"]),
@@ -53,14 +53,13 @@ let package = Package(
             ]
         ),
         .target(
-            name: "DefaultStore",
+            name: "DefaultsStore",
             dependencies: [
             ]
         ),
         .target(
             name: "Network",
             dependencies: [
-                
             ]
         ),
         .target(
